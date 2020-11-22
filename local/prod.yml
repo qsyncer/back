@@ -1,0 +1,16 @@
+---
+django:
+  SECRET_KEY: this will be a super long secret in prod, but this is just for show
+  DEBUG: false
+  ALLOWED_HOSTS:
+    - "localhost"
+  SESSION_COOKIE_SECURE: true
+  CSRF_COOKIE_SECURE: true
+
+database:
+  ENGINE: django.db.backends.postgresql
+  NAME: qsyncer
+  USER: qsyncer
+  PASSWORD: qsyncer
+  HOST: db
+  PORT: 5432

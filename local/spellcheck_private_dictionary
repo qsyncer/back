@@ -1,0 +1,6 @@
+config
+qsyncer
+startproject
+urlpatterns
+urls
+django

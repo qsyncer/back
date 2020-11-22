@@ -11,3 +11,5 @@ pre-commit<3
 mypy
 pylint
 yamllint
+django-stubs
+pyenchant

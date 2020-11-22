@@ -30,10 +30,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /tmp/pre-commit-cache
-          key: pre-commit-v1-{{ hashFiles('.pre-commit-config.yaml') }}
+          key: pre-commit-v2-{{ hashFiles('.pre-commit-config.yaml') }}
           restore-keys: |
-            pre-commit-v1-{{ hashFiles('.pre-commit-config.yaml') }}
-            pre-commit-v1-
+            pre-commit-v2-{{ hashFiles('.pre-commit-config.yaml') }}
+            pre-commit-v2-
 
       - name: Install the Python dependencies
         run: make sync

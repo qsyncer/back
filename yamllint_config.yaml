@@ -1,6 +1,7 @@
 ---
 extends: default
 ignore: |
+    .github/workflows/
     venv/
 rules:
     line-length:

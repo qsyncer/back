@@ -1,3 +1,6 @@
+# Use a standard bash shell, avoid zsh or fish
+SHELL:=/bin/bash
+
 .PHONY: init sync update.package update.package.all update.package.all update.hooks
 
 enable_venv=source venv/bin/activate

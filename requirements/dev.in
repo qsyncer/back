@@ -1,0 +1,13 @@
+# dev depend on base
+-r ./base.txt
+
+# dev dependencies:
+
+# Formatters
+black
+isort
+
+pre-commit<3
+mypy
+pylint
+yamllint

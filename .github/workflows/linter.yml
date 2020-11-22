@@ -11,20 +11,20 @@ jobs:
       - name: Check the code out
         uses: actions/checkout@v2
 
-      - name: Install Python 3.7
+      - name: Install Python 3.8
         uses: actions/setup-python@v1
         with:
-          python-version: '3.7'
+          python-version: '3.8'
 
       - name: Activate the cache for pip
         uses: actions/cache@v2
         with:
           path: venv
-          key: pip-v1-{{ hashFiles('requirements/base.txt') }}-{{ hashFiles('requirements/dev.txt') }}
+          key: pip-v2-{{ hashFiles('requirements/base.txt') }}-{{ hashFiles('requirements/dev.txt') }}
           restore-keys: |
-            pip-v1-{{ hashFiles('requirements/base.txt') }}-{{ hashFiles('requirements/dev.txt') }}
-            pip-v1-{{ hashFiles('requirements/base.txt') }}-
-            pip-v1-
+            pip-v2-{{ hashFiles('requirements/base.txt') }}-{{ hashFiles('requirements/dev.txt') }}
+            pip-v2-{{ hashFiles('requirements/base.txt') }}-
+            pip-v2-
 
       - name: Activate the cache for pre-commit
         uses: actions/cache@v2

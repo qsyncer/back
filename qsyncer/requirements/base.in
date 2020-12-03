@@ -1,0 +1,4 @@
+django<4
+gunicorn<21
+pyyaml<6
+psycopg2<3

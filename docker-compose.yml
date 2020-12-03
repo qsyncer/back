@@ -6,20 +6,65 @@ services:
     image: nsqio/nsq
     command: /nsqlookupd
     ports:
-      - "4160"
-      - "4161"
+      - 4160
+      - 4161
   nsqd:
     image: nsqio/nsq
     command: /nsqd --lookupd-tcp-address=nsqlookupd:4160
     depends_on:
       - nsqlookupd
     ports:
-      - "4150"
-      - "4151"
+      - 4150
+      - 4151
   nsqadmin:
     image: nsqio/nsq
     command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
     depends_on:
       - nsqlookupd
     ports:
-      - "8080:4171"
+      - 8080:4171
+
+  app:
+    image: qsyncer_app
+    command: |
+      dockerize -wait tcp://db:5432 \
+      gunicorn --config gunicorn_config.py qsyncer.wsgi:application
+    ports:
+      - 8000
+    volumes:
+      - "./local/prod.yml:/data/settings.yml:ro"
+      - static_volume:/staticfiles
+    environment:
+      - CONFIGURATION_FILE=/data/settings.yml
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12.0-alpine
+    ports:
+      - 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=qsyncer
+      - POSTGRES_PASSWORD=qsyncer
+      - POSTGRES_DB=qsyncer
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "qsyncer", "-h", "0.0.0.0", "-p", "5432", "-d", "qsyncer"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  web:
+    image: qsyncer_web
+    build:
+      context: docker/web
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+    ports:
+      - 8000:80
+    depends_on:
+      - app
+volumes:
+  postgres_data:
+  static_volume:

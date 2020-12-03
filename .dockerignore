@@ -1,0 +1,14 @@
+.github
+.gitignore
+.idea
+.pre-commit-config.yaml
+.tool-versions
+local
+venv
+LICENSE
+Makefile
+README.md
+yamllint_config.yaml
+
+*.sqlite3
+*.pyc

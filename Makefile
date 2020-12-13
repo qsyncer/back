@@ -63,3 +63,10 @@ docker.build.web:
 		--tag qsyncer_web:$(version) \
 		--tag qsyncer_web:latest \
 		docker/web
+
+django:
+	PYTHONUNBUFFERED=1 \
+	DJANGO_SETTINGS_MODULE=qsyncer.settings \
+	DEBUG=True \
+	CONFIGURATION_FILE=local/dev.yml \
+	python qsyncer/manage.py $(args)

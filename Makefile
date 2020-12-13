@@ -8,7 +8,7 @@ version?=$(shell python3 -c "from qsyncer import qsyncer; print(qsyncer.__versio
 
 
 # update env vars
-export PATH := bin:$(PATH)
+export PATH := ./venv/bin:$(PATH)
 
 sync: venv qsyncer/requirements/base.txt qsyncer/requirements/dev.txt
 	@pip-sync qsyncer/requirements/base.txt qsyncer/requirements/dev.txt

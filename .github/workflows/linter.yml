@@ -16,23 +16,20 @@ jobs:
         with:
           python-version: '3.8'
 
-      - name: Activate the cache for pip
+      - name: Cache venv
         uses: actions/cache@v2
         with:
           path: venv
-          key: pip-v2-{{ hashFiles('requirements/base.txt') }}-{{ hashFiles('requirements/dev.txt') }}
+          key: venv-{{ hashFiles('qsyncer/requirements/*.txt') }}
           restore-keys: |
-            pip-v2-{{ hashFiles('requirements/base.txt') }}-{{ hashFiles('requirements/dev.txt') }}
-            pip-v2-{{ hashFiles('requirements/base.txt') }}-
-            pip-v2-
+            venv-
 
-      - name: Activate the cache for pre-commit
+      - name: Cache pre-commit
         uses: actions/cache@v2
         with:
           path: /tmp/pre-commit-cache
           key: pre-commit-v2-{{ hashFiles('.pre-commit-config.yaml') }}
           restore-keys: |
-            pre-commit-v2-{{ hashFiles('.pre-commit-config.yaml') }}
             pre-commit-v2-
 
       - name: Install the Python dependencies

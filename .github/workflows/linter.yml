@@ -22,7 +22,6 @@ jobs:
           path: venv
           key: venv-{{ hashFiles('qsyncer/requirements/*.txt') }}
           restore-keys: |
-            venv-{{ hashFiles('qsyncer/requirements/*.txt') }}
             venv-
 
       - name: Cache pre-commit
@@ -31,7 +30,6 @@ jobs:
           path: /tmp/pre-commit-cache
           key: pre-commit-v2-{{ hashFiles('.pre-commit-config.yaml') }}
           restore-keys: |
-            pre-commit-v2-{{ hashFiles('.pre-commit-config.yaml') }}
             pre-commit-v2-
 
       - name: Install the Python dependencies
